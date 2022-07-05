@@ -38,50 +38,59 @@ class _CardPacoteTuristicoState extends State<CardPacoteTuristico> {
           children: [
             buildImage(),
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.pacoteTuristico.titulo,
-                    style: const TextStyle(
-                      fontSize: 21,
-                      fontWeight: FontWeight.bold,
+                  FittedBox(
+                    fit: BoxFit.fill,
+                    child: Text(
+                      widget.pacoteTuristico.titulo,
+                      style: const TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(widget.pacoteTuristico.transporte),
                   const SizedBox(height: 8),
-                  Row(
+                  Wrap(
                     children: [
                       const Icon(Icons.wb_sunny_outlined),
                       const SizedBox(width: 4),
                       Text('${widget.pacoteTuristico.numDiarias} Diárias'),
                       const SizedBox(width: 8),
-                      const Icon(Icons.person_outline),
-                      const SizedBox(width: 4),
-                      Text('${widget.pacoteTuristico.numPessoas} Pessoas'),
+                      Row(
+                        children: [
+                          const Icon(Icons.person_outline),
+                          const SizedBox(width: 4),
+                          Text('${widget.pacoteTuristico.numPessoas} Pessoas'),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Text('A partir de R\$ ${widget.pacoteTuristico.precoAntigo}'),
+                  Wrap(
+                    children: [
+                      Text(
+                        'R\$ ${widget.pacoteTuristico.precoAtual}',
+                        style: const TextStyle(
+                          fontSize: 24,
+                          color: Colors.orange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Text('A partir de R\$ ${widget.pacoteTuristico.precoAntigo}'),
-                  Text(
-                    'R\$ ${widget.pacoteTuristico.precoAtual}',
-                    style: const TextStyle(
-                      color: Colors.orange,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Cancelamento Grátis!',
-                    style: TextStyle(
-                      color: Colors.green[700],
+                  const Text(
+                    'Cancelamento Grátis',
+                    style: TextStyle(color: Colors.green,
                     ),
                   ),
                 ],
-              ),
+              )
             )
           ],
         ),
@@ -92,11 +101,18 @@ class _CardPacoteTuristicoState extends State<CardPacoteTuristico> {
   buildImage() {
     return Stack(
       children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(8),
+        Container(
+          height: 180,
+          width: double.infinity,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(8),
+            ),
+            child: Image.network(
+                widget.pacoteTuristico.imagem,
+                fit: BoxFit.cover,
+            ),
           ),
-          child: Image.network(widget.pacoteTuristico.imagem),
         ),
         Container(
           decoration: const BoxDecoration(
