@@ -43,8 +43,17 @@ class _DestaquesPageState extends State<DestaquesPage> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: ListView(
+      child: GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.35,
+        ),
         children: [
+
+          const SizedBox(height: 16),
+          CardPacoteTuristico(pacoteTuristico: pacote1),
+          CardPacoteTuristico(pacoteTuristico: pacote2),
+
           Container(
             decoration: BoxDecoration(
               color: Colors.purple,
@@ -97,12 +106,9 @@ class _DestaquesPageState extends State<DestaquesPage> {
                 ),
               ],
             ),
-          ),
-          const SizedBox(height: 16),
-          CardPacoteTuristico(pacoteTuristico: pacote1),
-          CardPacoteTuristico(pacoteTuristico: pacote2),
+          )
         ],
-      ),
+      )
     );
   }
   void onPressedButton() {
@@ -116,7 +122,6 @@ class _DestaquesPageState extends State<DestaquesPage> {
     );
   }
 }
-
 
 
 
